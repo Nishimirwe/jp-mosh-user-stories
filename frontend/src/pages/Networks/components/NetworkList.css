@@ -1,0 +1,150 @@
+.network-list {
+  background-color: var(--color-white);
+  border-right: 1px solid var(--color-neutral-200);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.network-list-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-neutral-200);
+}
+
+.network-list-header h2 {
+  margin: 0 0 1rem 0;
+  color: var(--color-neutral-900);
+  font-size: 1.25rem;
+}
+
+.network-counts {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.count-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.count-badge.biking {
+  background-color: #E8F5E9;
+  color: #4CAF50;
+}
+
+.count-badge.transit {
+  background-color: #E3F2FD;
+  color: #2196F3;
+}
+
+.network-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.empty-list {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.empty-list p {
+  margin: 0 0 0.5rem 0;
+  color: var(--color-neutral-700);
+  font-weight: 600;
+}
+
+.empty-list span {
+  color: var(--color-neutral-500);
+  font-size: 0.875rem;
+}
+
+.network-card {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-neutral-200);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.network-card:hover {
+  border-color: var(--color-primary-300);
+  transform: translateX(4px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.network-card.selected {
+  border-color: var(--color-primary-600);
+  background-color: var(--color-primary-50);
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+}
+
+.network-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.network-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.network-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: var(--color-neutral-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.network-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.network-type {
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.network-type.biking {
+  background-color: #E8F5E9;
+  color: #4CAF50;
+}
+
+.network-type.transit {
+  background-color: #E3F2FD;
+  color: #2196F3;
+}
+
+.baseline-badge {
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #FFF3E0;
+  color: #F57C00;
+}
+
+.network-date {
+  font-size: 0.8rem;
+  color: var(--color-neutral-500);
+}

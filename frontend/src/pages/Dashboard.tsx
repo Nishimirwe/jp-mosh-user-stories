@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { UserRole } from '../types';
 import './Dashboard.css';
@@ -72,13 +73,13 @@ export function Dashboard() {
         <div className="quick-actions">
           <h3>Quick Actions</h3>
           <div className="actions-grid">
-            <button className="action-button">View Cities</button>
-            <button className="action-button">Browse Networks</button>
+            <Link to="/networks" className="action-button">
+              🗺️ Browse Networks
+            </Link>
             {(isAdmin || isPlanner) && (
-              <>
-                <button className="action-button">Create Simulation</button>
-                <button className="action-button">Generate Report</button>
-              </>
+              <Link to="/simulations" className="action-button">
+                ▶️ View Simulations
+              </Link>
             )}
           </div>
         </div>

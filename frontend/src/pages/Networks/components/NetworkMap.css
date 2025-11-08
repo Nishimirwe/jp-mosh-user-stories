@@ -1,0 +1,35 @@
+.network-map-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-neutral-100);
+}
+
+.leaflet-container {
+  font-family: inherit;
+}
+
+.map-empty-state {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1000;
+  background: var(--color-white);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.map-empty-state p {
+  margin: 0 0 0.5rem 0;
+  color: var(--color-neutral-900);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.map-empty-state span {
+  color: var(--color-neutral-600);
+  font-size: 0.95rem;
+}

@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthStore } from './store/authStore';
-import { Login } from './pages/Login';
-import { Dashboard } from './pages/Dashboard';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuthStore } from "./store/authStore";
+import { Login } from "./pages/Login";
+import { Dashboard } from "./pages/Dashboard";
+import { NetworksPage } from "./pages/Networks/NetworksPage";
+import { SimulationsPage } from "./pages/Simulations/SimulationsPage";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { UserRole } from "./types";
 
 function App() {
   const { initialize, isAuthenticated } = useAuthStore();
@@ -27,6 +30,24 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/networks"
+          element={
+            <ProtectedRoute>
+              <NetworksPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/simulations"
+          element={
+            <ProtectedRoute allowedRoles={[UserRole.ADMIN, UserRole.PLANNER]}>
+              <SimulationsPage />
             </ProtectedRoute>
           }
         />
