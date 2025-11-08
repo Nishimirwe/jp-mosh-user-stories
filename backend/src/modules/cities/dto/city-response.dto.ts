@@ -1,74 +1,71 @@
-import { IsString, IsOptional, IsBoolean, MinLength, MaxLength, Matches } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-export class CreateCityDto {
+export class CityResponseDto {
+  @ApiProperty({
+    description: 'MongoDB ObjectID',
+    example: '507f1f77bcf86cd799439011',
+  })
+  id: string;
+
   @ApiProperty({
     description: 'City name',
     example: 'New York',
-    minLength: 2,
-    maxLength: 100,
   })
-  @IsString()
-  @MinLength(2)
-  @MaxLength(100)
   name: string;
 
   @ApiProperty({
-    description: 'Unique URL-friendly identifier (lowercase, alphanumeric, hyphens only)',
+    description: 'Unique URL-friendly identifier',
     example: 'new-york',
-    minLength: 2,
-    maxLength: 50,
-    pattern: '^[a-z0-9-]+$',
-  })
-  @IsString()
-  @MinLength(2)
-  @MaxLength(50)
-  @Matches(/^[a-z0-9-]+$/, {
-    message: 'Slug must contain only lowercase letters, numbers, and hyphens',
   })
   slug: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'Whether the city is active',
     example: true,
-    default: true,
   })
-  @IsOptional()
-  @IsBoolean()
-  active?: boolean;
+  active: boolean;
 
   @ApiPropertyOptional({
     description: 'City description',
     example: 'Transportation planning for New York metropolitan area',
-    maxLength: 500,
   })
-  @IsOptional()
-  @IsString()
-  @MaxLength(500)
   description?: string;
 
   @ApiPropertyOptional({
     description: 'Country name',
     example: 'United States',
-    maxLength: 100,
   })
-  @IsOptional()
-  @IsString()
-  @MaxLength(100)
   country?: string;
 
   @ApiPropertyOptional({
     description: 'IANA timezone identifier',
     example: 'America/New_York',
   })
-  @IsOptional()
-  @IsString()
   timezone?: string;
 
   @ApiPropertyOptional({
     description: 'Additional custom metadata',
     example: { population: 8336817, area: 783.8 },
   })
-  @IsOptional()
   metadata?: Record<string, any>;
+
+  @ApiProperty({
+    description: 'City creation timestamp',
+    example: '2025-01-15T10:30:00.000Z',
+  })
+  createdAt: Date;
+
+  @ApiProperty({
+    description: 'City last update timestamp',
+    example: '2025-01-15T10:30:00.000Z',
+  })
+  updatedAt: Date;
+}
+
+export class CityCountResponseDto {
+  @ApiProperty({
+    description: 'Total number of cities',
+    example: 42,
+  })
+  count: number;
 }

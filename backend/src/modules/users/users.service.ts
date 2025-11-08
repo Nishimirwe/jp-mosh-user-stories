@@ -119,21 +119,12 @@ export class UsersService {
       throw new BadRequestException('Invalid user ID format');
     }
 
-    // If cityId is being updated, verify it exists
-    if (updateUserDto.cityId) {
-      await this.citiesService.findOne(updateUserDto.cityId);
-    }
-
-    // Don't allow password updates through this method
-    const { password, ...updateData } = updateUserDto as any;
-
     const updatePayload: any = {};
-    if (updateData.firstName) updatePayload.firstName = updateData.firstName;
-    if (updateData.lastName) updatePayload.lastName = updateData.lastName;
-    if (updateData.cityId) updatePayload.city = updateData.cityId;
-    if (updateData.roles) updatePayload.roles = updateData.roles;
-    if (updateData.active !== undefined) updatePayload.active = updateData.active;
-    if (updateData.metadata) updatePayload.metadata = updateData.metadata;
+    if (updateUserDto.firstName) updatePayload.firstName = updateUserDto.firstName;
+    if (updateUserDto.lastName) updatePayload.lastName = updateUserDto.lastName;
+    if (updateUserDto.email) updatePayload.email = updateUserDto.email;
+    if (updateUserDto.roles) updatePayload.roles = updateUserDto.roles;
+    if (updateUserDto.metadata) updatePayload.metadata = updateUserDto.metadata;
 
     try {
       const updatedUser = await this.userModel
