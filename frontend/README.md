@@ -1,73 +1,315 @@
-# React + TypeScript + Vite
+# MOSH Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Modeling Open-Source for Health** - Transportation planning and simulation platform frontend application.
 
-Currently, two official plugins are available:
+## 🎨 Design
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This frontend application features a clean **blue and white** color theme, providing a professional and accessible interface for transportation planners and administrators.
 
-## React Compiler
+## 🚀 Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js (v18 or higher)
+- npm or yarn
+- Backend API running at `http://localhost:3009`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Installation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# Install dependencies
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The application will be available at **http://localhost:5173/**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Build for Production
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Create production build
+npm run build
+
+# Preview production build
+npm run preview
 ```
+
+## 🔐 Authentication & Test Credentials
+
+The application uses JWT-based authentication. After logging in, your session token is stored in localStorage and automatically included in all API requests.
+
+### Test Users
+
+Use these credentials to test different user roles:
+
+#### 1. Admin User (Full Access)
+```
+Email: john.admin@newyork.gov
+Password: password123
+Roles: ADMIN, PLANNER
+```
+**Capabilities:**
+- Manage cities and users
+- Full system access
+- Create and run simulations
+- Generate and view reports
+- Configure system settings
+
+#### 2. Planner User (New York)
+```
+Email: sarah.planner@newyork.gov
+Password: password123
+Role: PLANNER
+```
+**Capabilities:**
+- Create transportation scenarios
+- Run simulations
+- View and analyze results
+- Generate reports
+- City-specific access (New York)
+
+#### 3. Viewer User (Read-Only)
+```
+Email: mike.viewer@newyork.gov
+Password: password123
+Role: VIEWER
+```
+**Capabilities:**
+- View cities and networks
+- Browse simulations
+- Access reports
+- Read-only access
+- City-specific access (New York)
+
+#### 4. Paris Planner
+```
+Email: marie.planner@paris.fr
+Password: password123
+Role: PLANNER
+```
+**Capabilities:**
+- Create transportation scenarios for Paris
+- Run simulations
+- City-specific access (Paris)
+
+#### 5. Tokyo Admin
+```
+Email: yuki.admin@tokyo.jp
+Password: password123
+Roles: ADMIN, PLANNER
+```
+**Capabilities:**
+- Full admin access for Tokyo
+- Manage Tokyo users and settings
+
+## 🎯 User Roles
+
+### ADMIN
+Full system access including:
+- User management
+- City configuration
+- System settings
+- All CRUD operations
+- View all data across cities
+
+### PLANNER
+Transportation planning capabilities:
+- Create and edit transportation networks
+- Run simulations
+- Analyze simulation results
+- Generate reports
+- City-specific access
+
+### VIEWER
+Read-only access:
+- View cities and networks
+- Browse simulations
+- Access reports
+- No create/edit/delete permissions
+- City-specific access
+
+## 🏗️ Project Structure
+
+```
+frontend/
+├── src/
+│   ├── components/          # Reusable UI components
+│   │   └── ProtectedRoute.tsx
+│   ├── pages/              # Page components
+│   │   ├── Login.tsx       # Login page
+│   │   ├── Login.css
+│   │   ├── Dashboard.tsx   # Main dashboard
+│   │   └── Dashboard.css
+│   ├── services/           # API services
+│   │   └── auth.service.ts # Authentication service
+│   ├── store/              # State management (Zustand)
+│   │   └── authStore.ts    # Auth state
+│   ├── types/              # TypeScript types
+│   │   └── index.ts        # Type definitions
+│   ├── lib/                # Utilities
+│   │   └── axios.ts        # Axios configuration
+│   ├── styles/             # Global styles and theme
+│   │   └── theme.ts        # Blue/white theme config
+│   ├── App.tsx             # Main app component with routing
+│   ├── main.tsx            # Application entry point
+│   └── index.css           # Global CSS with theme variables
+├── .env                    # Environment variables
+├── package.json
+└── README.md
+```
+
+## 🎨 Theme Colors
+
+The application uses a blue and white color scheme:
+
+### Primary Colors (Blue)
+- `#E3F2FD` - Lightest blue (backgrounds)
+- `#2196F3` - Primary blue (buttons, links)
+- `#1E88E5` - Main blue (primary actions)
+- `#1976D2` - Dark blue (headers)
+- `#0D47A1` - Darkest blue (text)
+
+### Neutral Colors (White/Gray)
+- `#FFFFFF` - Pure white (cards, backgrounds)
+- `#FAFAFA` - Off-white (page backgrounds)
+- `#F5F5F5` - Light gray (hover states)
+- `#E0E0E0` - Medium gray (borders)
+
+## 🔌 API Integration
+
+The frontend connects to the backend API at `http://localhost:3009/api/v1`
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_API_URL=http://localhost:3009/api/v1
+```
+
+### API Authentication
+
+All authenticated requests automatically include the JWT token in the Authorization header:
+
+```typescript
+Authorization: Bearer <token>
+```
+
+The token is managed automatically by the Axios interceptor configured in `src/lib/axios.ts`.
+
+## 🛣️ Routes
+
+- `/` - Redirects to login or dashboard based on auth status
+- `/login` - Login page
+- `/dashboard` - Protected dashboard (requires authentication)
+
+## 📦 Dependencies
+
+### Core
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+
+### Routing & State
+- **react-router-dom** - Client-side routing
+- **zustand** - Lightweight state management
+
+### Data Fetching
+- **axios** - HTTP client
+- **@tanstack/react-query** - Data fetching and caching (ready to use)
+
+## 🔒 Security Features
+
+- JWT token-based authentication
+- Automatic token refresh on requests
+- Automatic logout on 401 responses
+- Protected routes with role-based access control
+- Secure token storage in localStorage
+
+## 🧪 Testing the Login Flow
+
+1. **Start the backend** (must be running):
+   ```bash
+   cd backend
+   npm run start:dev
+   ```
+
+2. **Seed the database** with test users:
+   ```bash
+   curl -X POST http://localhost:3009/api/v1/seed
+   ```
+
+3. **Start the frontend**:
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+4. **Open browser** to http://localhost:5173/
+
+5. **Login** with any test credentials above
+
+6. **Explore** the dashboard and role-specific features
+
+## 🚧 Development
+
+### Adding New Pages
+
+1. Create page component in `src/pages/`
+2. Add route to `src/App.tsx`
+3. Wrap with `<ProtectedRoute>` if authentication required
+4. Optionally specify `allowedRoles` for role-based access
+
+Example:
+```typescript
+<Route
+  path="/simulations"
+  element={
+    <ProtectedRoute allowedRoles={[UserRole.ADMIN, UserRole.PLANNER]}>
+      <Simulations />
+    </ProtectedRoute>
+  }
+/>
+```
+
+### Styling Guidelines
+
+- Use CSS variables defined in `index.css` for colors
+- Follow the blue/white theme palette
+- Use utility classes: `.card`, `.container`, `.text-primary`, etc.
+- Keep component styles in separate `.css` files
+
+### API Calls
+
+Use the configured Axios instance:
+
+```typescript
+import { api } from '../lib/axios';
+
+// GET request
+const response = await api.get('/cities');
+
+// POST request
+const response = await api.post('/users', userData);
+```
+
+## 📝 Notes
+
+- The application requires the backend API to be running
+- Test data is seeded using the `/api/v1/seed` endpoint
+- Tokens expire based on backend JWT configuration
+- All times are displayed in the user's city timezone
+
+## 🤝 Contributing
+
+1. Create feature branch
+2. Make changes
+3. Test with all user roles
+4. Ensure blue/white theme consistency
+5. Submit pull request
+
+## 📄 License
+
+[Add your license here]
