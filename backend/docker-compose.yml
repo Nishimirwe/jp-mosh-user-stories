@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: mosh-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: mosh_db
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - mosh-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: mosh-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - mosh-network
+
+  # Uncomment when ready to add MinIO for file storage
+  # minio:
+  #   image: minio/minio:latest
+  #   container_name: mosh-minio
+  #   restart: unless-stopped
+  #   environment:
+  #     MINIO_ROOT_USER: minioadmin
+  #     MINIO_ROOT_PASSWORD: minioadmin123
+  #   ports:
+  #     - '9000:9000'
+  #     - '9001:9001'
+  #   volumes:
+  #     - minio_data:/data
+  #   command: server /data --console-address ":9001"
+  #   networks:
+  #     - mosh-network
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+  # minio_data:
+  #   driver: local
+
+networks:
+  mosh-network:
+    driver: bridge
