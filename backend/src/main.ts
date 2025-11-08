@@ -25,7 +25,9 @@ async function bootstrap() {
   // Setup Swagger documentation (before global prefix)
   const swaggerConfig = new DocumentBuilder()
     .setTitle('MOSH Backend API')
-    .setDescription('Modal Shift World - Transportation Planning Simulation Platform API')
+    .setDescription(
+      'Modal Shift World - Transportation Planning Simulation Platform API',
+    )
     .setVersion('1.0')
     .addTag('auth', 'Authentication endpoints')
     .addTag('cities', 'City/Workspace management')
