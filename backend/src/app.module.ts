@@ -6,6 +6,9 @@ import { AppService } from './app.service';
 import { CitiesModule } from './modules/cities/cities.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { GeojsonModule } from './modules/geojson/geojson.module';
+import { SimulationsModule } from './modules/simulations/simulations.module';
+import { ReportsModule } from './modules/reports/reports.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -31,6 +34,12 @@ import configuration from './config/configuration';
     UsersModule,
 
     AuthModule,
+
+    GeojsonModule,
+
+    SimulationsModule,
+
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
