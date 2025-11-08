@@ -15,7 +15,9 @@ export function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) 
   }
 
   if (allowedRoles && user) {
-    const hasAllowedRole = user.roles.some(role => allowedRoles.includes(role));
+    // Handle both uppercase and lowercase roles
+    const userRolesUpper = user.roles.map(r => r.toString().toUpperCase() as UserRole);
+    const hasAllowedRole = userRolesUpper.some(role => allowedRoles.includes(role));
     if (!hasAllowedRole) {
       return (
         <div style={{ padding: '2rem', textAlign: 'center' }}>

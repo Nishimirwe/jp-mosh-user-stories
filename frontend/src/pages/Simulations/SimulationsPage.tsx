@@ -3,37 +3,62 @@ import { useAuthStore } from '../../store/authStore';
 import { useQuery } from '@tanstack/react-query';
 import { simulationsService } from '../../services/simulations.service';
 import { SimulationCard } from './components/SimulationCard';
+import { CreateSimulationForm } from './components/CreateSimulationForm';
+import { Modal } from '../../components/Modal';
+import { useCreateSimulation } from '../../hooks/useSimulations';
 import { UserRole } from '../../types';
 import './SimulationsPage.css';
 
 export function SimulationsPage() {
   const { user } = useAuthStore();
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const createSimulation = useCreateSimulation();
 
   const { data: simulations, isLoading } = useQuery({
     queryKey: ['simulations', user?.cityId],
-    queryFn: () => simulationsService.getAllSimulations(user?.cityId),
-    refetchInterval: (data) => {
+    queryFn: async () => {
+      if (!user?.cityId) return [];
+      return await simulationsService.getAllSimulations(user.cityId);
+    },
+    enabled: !!user?.cityId,
+    refetchInterval: (query) => {
       // Auto-refresh every 5 seconds if any simulation is running
-      const hasRunning = data?.some(sim => sim.status === 'RUNNING');
+      const data = query.state.data;
+      const hasRunning = Array.isArray(data) && data.some(sim => sim.status === 'RUNNING');
       return hasRunning ? 5000 : false;
     },
   });
 
   const canCreateSimulation = user?.roles.some(role =>
-    [UserRole.ADMIN, UserRole.PLANNER].includes(role)
+    [UserRole.ADMIN, UserRole.PLANNER].includes(role.toString().toUpperCase() as UserRole)
   );
 
-  const filtered = simulations?.filter(sim =>
+  // Ensure simulations is always an array
+  const simulationsArray = Array.isArray(simulations) ? simulations : [];
+
+  const filtered = simulationsArray.filter(sim =>
     statusFilter === 'all' ? true : sim.status === statusFilter
-  ) || [];
+  );
 
   const statusCounts = {
-    all: simulations?.length || 0,
-    PENDING: simulations?.filter(s => s.status === 'PENDING').length || 0,
-    RUNNING: simulations?.filter(s => s.status === 'RUNNING').length || 0,
-    COMPLETED: simulations?.filter(s => s.status === 'COMPLETED').length || 0,
-    FAILED: simulations?.filter(s => s.status === 'FAILED').length || 0,
+    all: simulationsArray.length,
+    PENDING: simulationsArray.filter(s => s.status === 'PENDING').length,
+    RUNNING: simulationsArray.filter(s => s.status === 'RUNNING').length,
+    COMPLETED: simulationsArray.filter(s => s.status === 'COMPLETED').length,
+    FAILED: simulationsArray.filter(s => s.status === 'FAILED').length,
+  };
+
+  const handleCreateSimulation = async (data: any) => {
+    try {
+      await createSimulation.mutateAsync({
+        ...data,
+        cityId: user?.cityId!,
+      });
+      setIsCreateModalOpen(false);
+    } catch (error) {
+      console.error('Failed to create simulation:', error);
+    }
   };
 
   return (
@@ -46,9 +71,11 @@ export function SimulationsPage() {
           </p>
         </div>
         {canCreateSimulation && (
-          <button className="primary-button" disabled>
-            Create Simulation
-            <span className="badge-soon">Coming Soon</span>
+          <button
+            className="primary-button"
+            onClick={() => setIsCreateModalOpen(true)}
+          >
+            ➕ Create Simulation
           </button>
         )}
       </header>
@@ -116,6 +143,18 @@ export function SimulationsPage() {
           </div>
         )}
       </div>
+
+      <Modal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        title="Create New Simulation"
+      >
+        <CreateSimulationForm
+          onSubmit={handleCreateSimulation}
+          onCancel={() => setIsCreateModalOpen(false)}
+          isSubmitting={createSimulation.isPending}
+        />
+      </Modal>
     </div>
   );
 }

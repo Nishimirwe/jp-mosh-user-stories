@@ -19,9 +19,11 @@ export function Dashboard() {
   const getDashboardContent = () => {
     if (!user) return null;
 
-    const isAdmin = user.roles.includes(UserRole.ADMIN);
-    const isPlanner = user.roles.includes(UserRole.PLANNER);
-    const isViewer = user.roles.includes(UserRole.VIEWER);
+    // Handle both uppercase and lowercase role strings
+    const roles = user.roles.map(r => r.toString().toUpperCase());
+    const isAdmin = roles.includes(UserRole.ADMIN);
+    const isPlanner = roles.includes(UserRole.PLANNER);
+    const isViewer = roles.includes(UserRole.VIEWER);
 
     return (
       <div className="dashboard-content">
