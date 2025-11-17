@@ -1,13 +1,13 @@
-# ✅ Completed Features - MOSH Frontend
+# Completed Features - MOSH Frontend
 
 ## Overview
 The MOSH (Modeling Open-Source for Health) frontend application has been successfully implemented with all core Phase 1 features complete.
 
 ---
 
-## 🎯 What's Been Completed
+## What's Been Completed
 
-### 1. **Authentication & Authorization** ✅
+### 1. **Authentication & Authorization** 
 - **Login Page** with blue/white theme
 - **JWT-based authentication** with Axios interceptors
 - **Role-based access control** (ADMIN, PLANNER, VIEWER)
@@ -24,7 +24,7 @@ The MOSH (Modeling Open-Source for Health) frontend application has been success
 
 ---
 
-### 2. **Dashboard** ✅
+### 2. **Dashboard**
 - **Role-specific capabilities display**
 - **Welcome message** with user info
 - **Quick actions** with navigation links
@@ -37,7 +37,7 @@ The MOSH (Modeling Open-Source for Health) frontend application has been success
 
 ---
 
-### 3. **Networks Page** ✅
+### 3. **Networks Page**
 - **Interactive map viewer** using Leaflet
 - **GeoJSON network rendering** with color coding:
   - 🚴 Green (#4CAF50) for biking networks
@@ -68,13 +68,12 @@ The MOSH (Modeling Open-Source for Health) frontend application has been success
 
 ---
 
-### 4. **Simulations Page** ✅
+### 4. **Simulations Page**
 - **Status filtering** (All, Pending, Running, Completed, Failed)
 - **Status count badges** for each filter
 - **Auto-refresh polling** (every 5 seconds when simulations are running)
 - **Simulation cards** with:
   - Status badges with color coding
-  - Status icons (⏳ ▶️ ✅ ❌)
   - Creation/start/completion timestamps
   - Progress indicator for running simulations
   - Error messages for failed simulations
@@ -85,10 +84,10 @@ The MOSH (Modeling Open-Source for Health) frontend application has been success
 - **Blue gradient header**
 
 **Status Colors:**
-- 🟠 Orange (#F57C00) - PENDING
-- 🔵 Blue (#2196F3) - RUNNING (with pulse animation)
-- 🟢 Green (#4CAF50) - COMPLETED
-- 🔴 Red (#F44336) - FAILED
+- Orange (#F57C00) - PENDING
+- Blue (#2196F3) - RUNNING (with pulse animation)
+- Green (#4CAF50) - COMPLETED
+- Red (#F44336) - FAILED
 
 **Files:**
 - [src/pages/Simulations/SimulationsPage.tsx](src/pages/Simulations/SimulationsPage.tsx)
@@ -98,7 +97,7 @@ The MOSH (Modeling Open-Source for Health) frontend application has been success
 
 ---
 
-### 5. **Service Layer** ✅
+### 5. **Service Layer**
 - **API service modules** for all resources:
   - Authentication service
   - Networks service (CRUD operations)
@@ -117,7 +116,7 @@ The MOSH (Modeling Open-Source for Health) frontend application has been success
 
 ---
 
-### 6. **React Query Hooks** ✅
+### 6. **React Query Hooks**
 - **useNetworks** - Fetch all networks with caching
 - **useNetwork** - Fetch single network
 - **useCreateNetwork** - Create network with optimistic updates
@@ -129,7 +128,7 @@ The MOSH (Modeling Open-Source for Health) frontend application has been success
 
 ---
 
-### 7. **Routing** ✅
+### 7. **Routing**
 - **React Router v6** setup
 - **Protected routes** with role-based access
 - **Auto-redirects** based on auth status
@@ -145,7 +144,7 @@ The MOSH (Modeling Open-Source for Health) frontend application has been success
 
 ---
 
-### 8. **Theme & Styling** ✅
+### 8. **Theme & Styling**
 - **Blue and white color scheme** throughout
 - **CSS variables** for consistent theming
 - **Responsive design** (mobile, tablet, desktop)
@@ -170,7 +169,7 @@ The MOSH (Modeling Open-Source for Health) frontend application has been success
 
 ---
 
-## 🧪 Testing the Application
+## Testing the Application
 
 ### Start the Application
 
@@ -215,40 +214,19 @@ Password: password123
 
 ---
 
-## 📊 User Flow Testing
+## User Flow Testing
 
-### 1. Login Flow
-✅ Navigate to http://localhost:5173/
-✅ Enter credentials
-✅ Click "Sign In"
-✅ Redirect to dashboard
-✅ See user-specific capabilities
+### 1. Login Flow Navigate to http://localhost:5173/ Enter credentials Click "Sign In" Redirect to dashboard See user-specific capabilities
 
-### 2. Networks Flow
-✅ Click "Browse Networks" from dashboard
-✅ See list of networks in sidebar
-✅ See networks rendered on map
-✅ Toggle biking/transit layers
-✅ Click network to select/highlight
-✅ See color-coded networks (green=biking, blue=transit)
+### 2. Networks Flow Click "Browse Networks" from dashboard See list of networks in sidebar See networks rendered on map Toggle biking/transit layers Click network to select/highlight See color-coded networks (green=biking, blue=transit)
 
-### 3. Simulations Flow (ADMIN/PLANNER only)
-✅ Click "View Simulations" from dashboard
-✅ See list of simulations
-✅ Filter by status (All, Pending, Running, Completed, Failed)
-✅ See auto-refresh when simulations are running
-✅ See status badges with correct colors
-✅ See "View Results" button for completed simulations
-✅ See error messages for failed simulations
+### 3. Simulations Flow (ADMIN/PLANNER only) Click "View Simulations" from dashboard See list of simulations Filter by status (All, Pending, Running, Completed, Failed) See auto-refresh when simulations are running See status badges with correct colors See "View Results" button for completed simulations See error messages for failed simulations
 
-### 4. Logout Flow
-✅ Click "Logout" from dashboard
-✅ Redirect to login page
-✅ Auth token cleared
+### 4. Logout Flow Click "Logout" from dashboard Redirect to login page Auth token cleared
 
 ---
 
-## 🚀 What's Next (Phase 2+)
+## What's Next (Phase 2+)
 
 ### Not Yet Implemented (Future Phases)
 
@@ -280,7 +258,7 @@ Password: password123
 
 ---
 
-## 📦 Dependencies
+## Dependencies
 
 ### Core
 - React 18
@@ -305,35 +283,35 @@ Password: password123
 
 ---
 
-## 🎯 Acceptance Criteria Status
+## Acceptance Criteria Status
 
-### Phase 1 MVP - ✅ COMPLETE
+### Phase 1 MVP - COMPLETE
 
-#### US-001: View Transportation Networks ✅
-- ✅ Map viewer with Leaflet integration
-- ✅ GeoJSON rendering
-- ✅ Layer toggles for biking/transit
-- ✅ Network list with metadata
-- ✅ Network selection/highlighting
+#### US-001: View Transportation Networks
+- Map viewer with Leaflet integration
+- GeoJSON rendering
+- Layer toggles for biking/transit
+- Network list with metadata
+- Network selection/highlighting
 
-#### US-002: View Simulation Status ✅
-- ✅ Simulations list page
-- ✅ Status filtering
-- ✅ Auto-refresh for running simulations
-- ✅ Status badges with color coding
-- ✅ Progress indicators
-- ✅ Error messages
+#### US-002: View Simulation Status
+- Simulations list page
+- Status filtering
+- Auto-refresh for running simulations
+- Status badges with color coding
+- Progress indicators
+- Error messages
 
-#### US-007: Authenticate ✅
-- ✅ Login page
-- ✅ JWT authentication
-- ✅ Role-based access control
-- ✅ Protected routes
-- ✅ Auto-logout on 401
+#### US-007: Authenticate
+- Login page
+- JWT authentication
+- Role-based access control
+- Protected routes
+- Auto-logout on 401
 
 ---
 
-## 📝 Notes
+## Notes
 
 - All components follow the blue/white theme
 - All pages are responsive (mobile, tablet, desktop)
@@ -346,7 +324,7 @@ Password: password123
 
 ---
 
-## ✨ Highlights
+## Highlights
 
 1. **Clean Architecture**: Service layer, hooks, components properly separated
 2. **Type Safety**: Full TypeScript coverage
@@ -358,4 +336,4 @@ Password: password123
 
 ---
 
-🎉 **Phase 1 Complete!** The application is ready for testing and demo.
+ **Phase 1 Complete!** The application is ready for testing and demo.
